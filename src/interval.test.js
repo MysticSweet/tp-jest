@@ -81,3 +81,37 @@ describe('union', function () {
     });
 });
 
+describe('intersection', function () {
+    var interval1 = new Interval(1,5);
+    var interval2 = new Interval(3,10);
+    var result12 = new Interval(3,5);
+
+    var intervalOut = new Interval(99,110);
+    var intervalIn = new Interval(2,4);
+
+    var intervalSequel = new Interval(5,20);
+    var result = new Interval(5,5);
+
+    test('Test intersection - intervals qui se superposent', () => { 
+        expect(interval1.intersection(interval2)).toEqual(result12)
+    });
+    test('Test intersection - intervals qui se superposent (inversement)', () => { 
+        expect(interval2.intersection(interval1)).toEqual(result12)
+    });
+    test('Test intersection - intervals qui sont séparés', () => { 
+        expect(interval1.intersection(intervalOut)).toBeNull()
+    });
+    test('Test intersection - interval A inclu interval B', () => { 
+        expect(interval1.intersection(intervalIn)).toEqual(intervalIn)
+    });
+    test('Test intersection - interval B inclu interval A', () => { 
+        expect(intervalIn.intersection(interval1)).toEqual(intervalIn)
+    });
+    test('Test intersection - interval A est suivi par interval B', () => { 
+        expect(interval1.intersection(intervalSequel)).toEqual(result)
+    });
+    test('Test intersection - interval B suit interval A', () => { 
+        expect(intervalSequel.intersection(interval1)).toEqual(result)
+    });
+});
+
