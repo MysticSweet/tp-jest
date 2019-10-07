@@ -1,5 +1,16 @@
 const Interval = require('./interval');
 
+describe('toString', function () {
+    var interval = new Interval(1,5);
+
+    test('Test toString - new Interval(1,5) => interval défini', () => { 
+        expect(interval).toBeDefined()
+    });
+    test('Test toString - Interval(1,5).toString() => "[1,5]"', () => { 
+        expect(interval.toString()).toEqual("[1,5]")
+    });
+});
+
 describe('overlaps', function () {
     var interval1 = new Interval(1,5);
     var interval1Bis = new Interval(1,5);
