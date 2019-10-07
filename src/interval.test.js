@@ -52,3 +52,32 @@ describe('includes', function () {
         expect(interval1.includes(intervalOut)).toBe(false)
     });
 });
+
+describe('union', function () {
+    var interval1 = new Interval(1,5);
+    var interval2 = new Interval(5,7);
+    var result12 = [new Interval(1,7)];
+
+    var interval3 = new Interval(2,10);
+    var result13 = [new Interval(1,10)];
+
+    var interval4 = new Interval(50,60);
+    var result14 = [interval1, interval4];
+
+    var interval5 = new Interval(2,4);
+    var result15 = [interval1];
+
+    test('Test union - intervals qui se suivent', () => { 
+        expect(interval1.union(interval2)).toEqual(result12)
+    });
+    test('Test union - intervals qui se superposent', () => { 
+        expect(interval1.union(interval3)).toEqual(result13)
+    });
+    test('Test union - intervals qui sont séparés', () => { 
+        expect(interval1.union(interval4)).toEqual(result14)
+    });
+    test('Test union - interval inclu dans l\'autre', () => { 
+        expect(interval1.union(interval5)).toEqual(result15)
+    });
+});
+
