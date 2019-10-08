@@ -9,6 +9,17 @@
   "scripts": {
     "test": "jest"
   },
+  "jest": {
+    "verbose": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 0,
+        "functions": 0,
+        "lines": 70,
+        "statements": 0
+      }
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Kirouane/test-tp.git"
@@ -25,4 +36,5 @@
   "dependencies": {
     "lowdb": "^1.0.0"
   }
+
 }
