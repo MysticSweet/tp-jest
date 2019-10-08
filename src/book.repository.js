@@ -45,21 +45,61 @@ class BookRepository {
      *  [
      *      {
      *          year: 2017,
-     *          month, 2,
-     *          count, 129,
+     *          month: 2,
+     *          count: 129,
      *          count_cumulative: 129
      *      },
      *      {
      *          year: 2017,
-     *          month, 3,
-     *          count, 200,
+     *          month: 3,
+     *          count: 200,
      *          count_cumulative: 329
      *      },
      *      ....
      *  ]
      */
-    getCountBookAddedByMont(bookName) {
+    getCountBookAddedByMonth(bookName) {
+        var counter = 0;
+        var counter_cumulative = 0;
+        var last_y = -1;
+        var last_m = -1;
+        var result = [];
 
+        var books = this.db.get('books').sortBy('added_at').value();
+        for (var i = 0; i < books.length; i++){
+            var date = books[i].added_at.split('-');
+            var current_y = Number(date[0]);
+            var current_m = Number(date[1]);
+
+            if (last_y !== current_y || last_m !== current_m){
+                if (last_m !== -1 && last_y !== -1){
+                    result.push({
+                        year: last_y, 
+                        month: last_m, 
+                        count: counter, 
+                        count_cumulative: counter_cumulative
+                    });
+                    counter = 0;
+                }
+
+                last_y = current_y;
+                last_m = current_m;
+            }
+
+            counter++;
+            counter_cumulative++;
+
+            if (counter_cumulative == books.length){
+               result.push({
+                    year: last_y, 
+                    month: last_m, 
+                    count: counter, 
+                    count_cumulative: counter_cumulative
+                }); 
+            }
+        }
+
+        return result;
     }
 
 }
