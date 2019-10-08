@@ -98,7 +98,23 @@ class Interval {
      * @returns {Interval|null}
      */
     intersection(interval) {
-
+    	if (this.includes(interval)){
+    		return interval;
+    	}
+    	else if (interval.includes(this)){
+    		return this;
+    	}
+    	else if (interval.overlaps(this) || this.start == interval.end || this.end == interval.start){
+    		// Intersection
+    		if (Math.min(this.start,interval.start) == this.start){
+    			return new Interval(interval.start,this.end);
+    		} else {
+    			return new Interval(this.start,interval.end);
+    		}
+    	} 
+    	else {
+    		return null;
+    	}
     };
 
     /**
@@ -118,7 +134,37 @@ class Interval {
      * @returns {Interval[]}
      */
     exclusion(interval) {
+    	var exclusion = [];
 
+    	if (this.includes(interval) && (this.start < interval.start && this.end > interval.end)){
+    		exclusion.push(new Interval(this.start, interval.start-1));
+    		exclusion.push(new Interval(interval.end+1, this.end));
+    	}
+    	else if (interval.includes(this) && (this.start > interval.start && this.end < interval.end)){
+    		exclusion.push(new Interval(interval.start, this.start-1));
+    		exclusion.push(new Interval(this.end+1, interval.end));
+    	}
+    	else if (interval.overlaps(this) || this.start == interval.end || this.end == interval.start){
+    		if (this.start < interval.start){
+    			exclusion.push(new Interval(this.start, interval.start-1));
+    			exclusion.push(new Interval(this.end+1, interval.end));
+    		}
+    		else if (this.start > interval.start){
+    			exclusion.push(new Interval(interval.start, this.start-1));
+    			exclusion.push(new Interval(interval.end+1, this.end));
+    		}
+    	}
+    	else {
+    		if (this.start < interval.start){
+    			exclusion.push(this);
+    			exclusion.push(interval);
+    		} else {
+    			exclusion.push(interval);
+    			exclusion.push(this);
+    		}
+    	}
+
+    	return exclusion;
     };
 }
 

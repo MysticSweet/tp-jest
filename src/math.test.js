@@ -88,6 +88,9 @@ describe('cipher', function () {
     test('Test cipher de "1234" => "1234"', () => { 
         expect(Util.cipher("1234")).toEqual("1234")
     });
+    test('Test cipher de "az" => "ba"', () => { 
+        expect(Util.cipher("az")).toEqual("ba")
+    });
 });
 
 describe('pairs', function () {
