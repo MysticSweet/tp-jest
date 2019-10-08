@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1570527932572" clover="3.2.0">
-  <project timestamp="1570527932572" name="All files">
-    <metrics statements="44" coveredstatements="42" conditionals="43" coveredconditionals="41" methods="7" coveredmethods="7" elements="94" coveredelements="90" complexity="0" loc="44" ncloc="44" packages="1" files="1" classes="1"/>
+<coverage generated="1570528888691" clover="3.2.0">
+  <project timestamp="1570528888691" name="All files">
+    <metrics statements="44" coveredstatements="44" conditionals="43" coveredconditionals="42" methods="7" coveredmethods="7" elements="94" coveredelements="93" complexity="0" loc="44" ncloc="44" packages="1" files="1" classes="1"/>
     <file name="interval.js" path="D:\Ecoles\Ensiie\2A\Test\TP\tp-jest\src\interval.js">
-      <metrics statements="44" coveredstatements="42" conditionals="43" coveredconditionals="41" methods="7" coveredmethods="7"/>
+      <metrics statements="44" coveredstatements="44" conditionals="43" coveredconditionals="42" methods="7" coveredmethods="7"/>
       <line num="3" count="55" type="stmt"/>
       <line num="4" count="55" type="stmt"/>
       <line num="8" count="1" type="stmt"/>
-      <line num="26" count="19" type="cond" truecount="2" falsecount="0"/>
+      <line num="26" count="20" type="cond" truecount="2" falsecount="0"/>
       <line num="46" count="32" type="cond" truecount="2" falsecount="0"/>
-      <line num="66" count="4" type="stmt"/>
-      <line num="68" count="4" type="cond" truecount="5" falsecount="0"/>
+      <line num="66" count="5" type="stmt"/>
+      <line num="68" count="5" type="cond" truecount="5" falsecount="0"/>
       <line num="69" count="3" type="stmt"/>
-      <line num="72" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="72" count="2" type="cond" truecount="2" falsecount="0"/>
       <line num="73" count="1" type="stmt"/>
       <line num="74" count="1" type="stmt"/>
-      <line num="76" count="0" type="stmt"/>
-      <line num="77" count="0" type="stmt"/>
-      <line num="81" count="4" type="stmt"/>
+      <line num="76" count="1" type="stmt"/>
+      <line num="77" count="1" type="stmt"/>
+      <line num="81" count="5" type="stmt"/>
       <line num="101" count="7" type="cond" truecount="2" falsecount="0"/>
       <line num="102" count="1" type="stmt"/>
       <line num="104" count="6" type="cond" truecount="2" falsecount="0"/>
