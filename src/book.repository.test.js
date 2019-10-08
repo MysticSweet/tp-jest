@@ -19,75 +19,109 @@ describe('Book repository Save', function () {
 
 describe('Book repository getTotalCount', function () {
 
-    test('getTotalCount of books - no save', () => {
+    test('getTotalCount of books - value() appelé', () => {
 
         const dbMock = {
             get : jest.fn().mockReturnThis(),
-            push : jest.fn().mockReturnThis(),
-            write : jest.fn().mockReturnThis()
+            size : jest.fn().mockReturnThis(),
+            value : jest.fn().mockReturnThis()
+        };
+        const repository = new BookRepository(dbMock);
+        var total = repository.getTotalCount();
+
+        expect(dbMock.value).toBeCalled();
+    });
+    test('getTotalCount of books - aucune donnée', () => {
+
+        const dbMock = {
+            get : jest.fn().mockReturnThis(),
+            size : jest.fn().mockReturnThis(),
+            value : jest.fn().mockReturnValue(0)
         };
         const repository = new BookRepository(dbMock);
 
-        expect(repository.getTotalCount()).toBeUndefined();
+        expect(repository.getTotalCount()).toBe(0);
     });
-    test('getTotalCount of books - with pre-save', () => {
-        var books = [{id: 1, name: "Unit test"}, {id: 2, name: "Unit test 2"}];
+    test('getTotalCount of books - avec données', () => {
 
         const dbMock = {
-            get : jest.fn().mockReturnValue(books)
+            get : jest.fn().mockReturnThis(),
+            size : jest.fn().mockReturnThis(),
+            value : jest.fn().mockReturnValue(2)
         };
         const repository = new BookRepository(dbMock);
         var total = repository.getTotalCount();
 
         expect(total).toBe(2);
     });
-    test('getTotalCount of books - get() appelé', () => {
-        var books = [{id: 1, name: "Unit test"}, {id: 2, name: "Unit test 2"}, {id: 3, name: "Unit test 3"}];
+    test('getTotalCount of books - avec données save', () => {
+        var arr_books = [{id: 1, name: "Unit test"}];
 
         const dbMock = {
-            get : jest.fn().mockReturnValue(books)
+            get : function() {
+                var books = arr_books;
+                return {
+                    push : function (book) {
+                        books.push(book);
+                        return {
+                            write : function () {
+                                return 0;
+                            }
+                        }
+                    },
+                    size : function (){
+                        var length = books.length;
+                        return{
+                            value : function (length) {
+                                return arr_books.length;
+                            }
+                        }
+                    }
+                }
+            }
         };
         const repository = new BookRepository(dbMock);
-        var total = repository.getTotalCount();
+        repository.save({id: 2, name: "Unit test"});
 
-        expect(dbMock.get).toBeCalled();
+        expect(repository.getTotalCount()).toBe(2);
     });
 });
 
 describe('Book repository getTotalPrice', function () {
 
-    test('getTotalPrice of books - with pre-save', () => {
-        var books = [{id: 1, name: "Unit test", price: 8.1}, {id: 2, name: "Unit test 2", price: 1.9}];
-
+    test('getTotalPrice of books - aucun livre', () => {
         const dbMock = {
-            get : jest.fn().mockReturnValue(books)
+            get : jest.fn().mockReturnThis(),
+            size : jest.fn().mockReturnThis(),
+            value : jest.fn().mockReturnValue(0)
         };
         const repository = new BookRepository(dbMock);
         var total = repository.getTotalPrice();
 
-        expect(total).toBe(10);
+        expect(total).toBe(0);
     });
-    test('getTotalPrice of books - with pre-save in text', () => {
-        var books = [{id: 1, name: "Unit test", price: "10.6"}, {id: 2, name: "Unit test 2", price: "1.9"}];
-
+    test('getTotalPrice of books - 2 livres', () => {
         const dbMock = {
-            get : jest.fn().mockReturnValue(books)
+            get : jest.fn().mockReturnThis(),
+            size : jest.fn().mockReturnThis(),
+            value : jest.fn().mockReturnValueOnce(2).mockReturnValueOnce(5.0).mockReturnValueOnce(2.5)
         };
         const repository = new BookRepository(dbMock);
         var total = repository.getTotalPrice();
 
-        expect(total).toBe(12.5);
+        expect(total).toBe(7.5);
     });
-    test('getTotalPrice of books - get() appelé', () => {
-        var books = [{id: 1, name: "Unit test", price: "10.0"}];
-
+    test('getTotalPrice of books - value() called 3 times', () => {
         const dbMock = {
-            get : jest.fn().mockReturnValue(books)
+            get : jest.fn().mockReturnThis(),
+            size : jest.fn().mockReturnThis(),
+            value : jest.fn().mockReturnValueOnce(2).mockReturnValueOnce(5.0).mockReturnValueOnce(2.5)
         };
+
         const repository = new BookRepository(dbMock);
         var total = repository.getTotalPrice();
 
-        expect(dbMock.get).toBeCalled();
+        expect(dbMock.value.mock.calls.length).toBe(3);
     });
 });
 
