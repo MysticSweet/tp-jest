@@ -101,10 +101,11 @@ describe('Book repository getTotalPrice', function () {
         expect(total).toBe(0);
     });
     test('getTotalPrice of books - 2 livres', () => {
+        var books = [{id:1,price:5.0},{id:2,price:2.5}];
         const dbMock = {
             get : jest.fn().mockReturnThis(),
             size : jest.fn().mockReturnThis(),
-            value : jest.fn().mockReturnValueOnce(2).mockReturnValueOnce(5.0).mockReturnValueOnce(2.5)
+            value : jest.fn().mockReturnValueOnce(books.length).mockReturnValueOnce(books[0].price).mockReturnValueOnce(books[1].price)
         };
         const repository = new BookRepository(dbMock);
         var total = repository.getTotalPrice();
@@ -112,10 +113,11 @@ describe('Book repository getTotalPrice', function () {
         expect(total).toBe(7.5);
     });
     test('getTotalPrice of books - value() called 3 times', () => {
+        var books = [{id:1,price:5.0},{id:2,price:2.5}];
         const dbMock = {
             get : jest.fn().mockReturnThis(),
             size : jest.fn().mockReturnThis(),
-            value : jest.fn().mockReturnValueOnce(2).mockReturnValueOnce(5.0).mockReturnValueOnce(2.5)
+            value : jest.fn().mockReturnValueOnce(books.length).mockReturnValueOnce(books[0].price).mockReturnValueOnce(books[1].price)
         };
 
         const repository = new BookRepository(dbMock);
@@ -129,8 +131,8 @@ describe('Book repository getBookByName', function () {
 
     test('getTotalPrice of books - value() called', () => {
         var book = {
-            'id' : 1,
-            "name" :"test"
+            id : 1,
+            name :"test"
         };
         const dbMock = {
             get : jest.fn().mockReturnThis(),
@@ -145,9 +147,10 @@ describe('Book repository getBookByName', function () {
     });
     test('getBookByName of books - livre "test"', () => {
         var book = {
-            'id' : 1,
-            "name" :"test"
+            id : 1,
+            name :"test"
         };
+        //var books = [{id: 1,name:"test"},{id: 2,name:"truc"}];
 
         const dbMock = {
             get : jest.fn().mockReturnThis(),
@@ -155,7 +158,7 @@ describe('Book repository getBookByName', function () {
             value : jest.fn().mockReturnValue(book)
         };
         const repository = new BookRepository(dbMock);
-        var received_book = repository.getBookByName();
+        var received_book = repository.getBookByName("test");
 
         expect(received_book).toEqual(book);
     });
@@ -165,8 +168,8 @@ describe('Book repository getCountBookAddedByMonth', function () {
 
     test('test de getCountBookAddedByMonth - value() called', () => {
         var book = {
-            'id' : 1,
-            "name" :"test"
+            id : 1,
+            name :"test"
         };
         const dbMock = {
             get : jest.fn().mockReturnThis(),
@@ -180,7 +183,7 @@ describe('Book repository getCountBookAddedByMonth', function () {
         expect(dbMock.value).toBeCalled();
     });
     test('getCountBookAddedByMonth of books - 2 livres sur 2 mois', () => {
-        var books = [{'id' : 1,"added_at" :"2017-02-05"},{'id' : 2,"added_at" :"2017-03-01"}];
+        var books = [{id : 1,added_at :"2017-02-05"},{id : 2,added_at :"2017-03-01"}];
         var res = [
                     {
                         year: 2017,
