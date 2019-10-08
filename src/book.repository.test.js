@@ -125,3 +125,43 @@ describe('Book repository getTotalPrice', function () {
     });
 });
 
+describe('Book repository getBookByName', function () {
+
+    test('getTotalPrice of books - value() called', () => {
+        var book = {
+            'id' : 1,
+            "name" :"test",
+            'price' :6.1,
+            "added_at" : '2019-01-01'
+        };
+        const dbMock = {
+            get : jest.fn().mockReturnThis(),
+            find : jest.fn().mockReturnThis(),
+            value : jest.fn().mockReturnValue(book)
+        };
+
+        const repository = new BookRepository(dbMock);
+        repository.getBookByName();
+
+        expect(dbMock.value).toBeCalled();
+    });
+    test('getBookByName of books - livre "test"', () => {
+        var book = {
+            'id' : 1,
+            "name" :"test",
+            'price' :6.1,
+            "added_at" : '2019-01-01'
+        };
+
+        const dbMock = {
+            get : jest.fn().mockReturnThis(),
+            find : jest.fn().mockReturnThis(),
+            value : jest.fn().mockReturnValue(book)
+        };
+        const repository = new BookRepository(dbMock);
+        var received_book = repository.getBookByName();
+
+        expect(received_book).toEqual(book);
+    });
+});
+
