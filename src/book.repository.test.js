@@ -53,3 +53,41 @@ describe('Book repository getTotalCount', function () {
         expect(dbMock.get).toBeCalled();
     });
 });
+
+describe('Book repository getTotalPrice', function () {
+
+    test('getTotalPrice of books - with pre-save', () => {
+        var books = [{id: 1, name: "Unit test", price: 8.1}, {id: 2, name: "Unit test 2", price: 1.9}];
+
+        const dbMock = {
+            get : jest.fn().mockReturnValue(books)
+        };
+        const repository = new BookRepository(dbMock);
+        var total = repository.getTotalPrice();
+
+        expect(total).toBe(10);
+    });
+    test('getTotalPrice of books - with pre-save in text', () => {
+        var books = [{id: 1, name: "Unit test", price: "10.6"}, {id: 2, name: "Unit test 2", price: "1.9"}];
+
+        const dbMock = {
+            get : jest.fn().mockReturnValue(books)
+        };
+        const repository = new BookRepository(dbMock);
+        var total = repository.getTotalPrice();
+
+        expect(total).toBe(12.5);
+    });
+    test('getTotalPrice of books - get() appelé', () => {
+        var books = [{id: 1, name: "Unit test", price: "10.0"}];
+
+        const dbMock = {
+            get : jest.fn().mockReturnValue(books)
+        };
+        const repository = new BookRepository(dbMock);
+        var total = repository.getTotalPrice();
+
+        expect(dbMock.get).toBeCalled();
+    });
+});
+
