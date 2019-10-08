@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1570528888691" clover="3.2.0">
-  <project timestamp="1570528888691" name="All files">
+<coverage generated="1570529079726" clover="3.2.0">
+  <project timestamp="1570529079726" name="All files">
     <metrics statements="44" coveredstatements="44" conditionals="43" coveredconditionals="42" methods="7" coveredmethods="7" elements="94" coveredelements="93" complexity="0" loc="44" ncloc="44" packages="1" files="1" classes="1"/>
     <file name="interval.js" path="D:\Ecoles\Ensiie\2A\Test\TP\tp-jest\src\interval.js">
       <metrics statements="44" coveredstatements="44" conditionals="43" coveredconditionals="42" methods="7" coveredmethods="7"/>
