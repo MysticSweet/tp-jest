@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1570528148182" clover="3.2.0">
+  <project timestamp="1570528148182" name="All files">
+    <metrics statements="15" coveredstatements="14" conditionals="11" coveredconditionals="11" methods="7" coveredmethods="4" elements="33" coveredelements="29" complexity="0" loc="15" ncloc="15" packages="1" files="1" classes="1"/>
+    <file name="interval.js" path="D:\Ecoles\Ensiie\2A\Test\TP\tp-jest\src\interval.js">
+      <metrics statements="15" coveredstatements="14" conditionals="11" coveredconditionals="11" methods="7" coveredmethods="4"/>
+      <line num="3" count="22" type="stmt"/>
+      <line num="4" count="22" type="stmt"/>
+      <line num="8" count="0" type="stmt"/>
+      <line num="26" count="10" type="cond" truecount="2" falsecount="0"/>
+      <line num="46" count="6" type="cond" truecount="2" falsecount="0"/>
+      <line num="66" count="5" type="stmt"/>
+      <line num="68" count="5" type="cond" truecount="5" falsecount="0"/>
+      <line num="69" count="3" type="stmt"/>
+      <line num="72" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="73" count="1" type="stmt"/>
+      <line num="74" count="1" type="stmt"/>
+      <line num="76" count="1" type="stmt"/>
+      <line num="77" count="1" type="stmt"/>
+      <line num="81" count="5" type="stmt"/>
+      <line num="125" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

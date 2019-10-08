@@ -76,6 +76,9 @@ describe('union', function () {
     test('Test union - intervals qui sont séparés', () => { 
         expect(interval1.union(interval4)).toEqual(result14)
     });
+    test('Test union - intervals qui sont séparés (inversement)', () => { 
+        expect(interval4.union(interval1)).toEqual(result14)
+    });
     test('Test union - interval inclu dans l\'autre', () => { 
         expect(interval1.union(interval5)).toEqual(result15)
     });
